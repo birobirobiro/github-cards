@@ -1,0 +1,191 @@
+:root {
+  --light-blue: rgb(32, 18, 95);
+  --dark-blue: rgb(204, 100, 223);
+  --violet: rgb(119, 188, 236);
+
+  --background-left: rgb(29, 33, 68);
+  --background-right: rgb(30, 25, 47);
+
+  --conic-gradient: conic-gradient(
+    var(--dark-blue),
+    var(--violet),
+    var(--light-blue),
+    var(--dark-blue)
+  );
+}
+
+a {
+  text-decoration: none;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from,
+  20%,
+  40%,
+  80%,
+  to {
+    transform: scale(1);
+  }
+
+  10%,
+  60% {
+    transform: scale(1.1);
+  }
+}
+
+body {
+  background: linear-gradient(
+    to right,
+    var(--background-left),
+    var(--background-right)
+  );
+  height: 100vh;
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
+}
+
+#background {
+  display: grid;
+  inset: 0px;
+  place-items: center;
+  position: fixed;
+  z-index: 1;
+}
+
+#circle {
+  animation: rotate 10s linear infinite;
+  background: var(--conic-gradient);
+  border-radius: 70vh;
+  display: grid;
+  filter: blur(1.5vh);
+  height: 70vh;
+  place-items: center;
+  position: relative;
+  width: 70vh;
+}
+
+#circle-inner {
+  border-radius: inherit;
+  inset: 5%;
+  position: absolute;
+}
+
+#circle-glow {
+  animation: pulse 10s ease-in-out infinite;
+  background: var(--conic-gradient);
+  border-radius: 100vh;
+  filter: blur(3vh);
+  height: 120%;
+  opacity: 0.25;
+  width: 120%;
+  z-index: 2;
+}
+
+#circle-inner {
+  background: linear-gradient(
+    to right,
+    var(--background-left),
+    var(--background-right)
+  );
+  z-index: 3;
+}
+
+#app {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+  position: relative;
+  width: 100vw;
+  z-index: 2;
+}
+
+#profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(10px, 0.8vw, 20px);
+  justify-content: center;
+  margin-left: 80px;
+  width: clamp(600px, 80vw, 1400px);
+}
+
+#profiles > .profile {
+  aspect-ratio: 7 / 8;
+  backdrop-filter: blur(0.75vw);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 1vw;
+  cursor: pointer;
+  transition: background-color 250ms;
+  width: calc(25% - clamp(10px, 0.8vw, 20px));
+}
+
+#profiles > .profile:hover {
+  backdrop-filter: blur(1vw);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile > .profile-content {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100% - clamp(8px, 1vw, 12px));
+  justify-content: center;
+  padding: clamp(8px, 1vw, 12px);
+}
+
+.profile > .profile-content > .profile-pic {
+  aspect-ratio: 1;
+  border: clamp(3px, 0.4vw, 5px) solid white;
+  border-radius: 100%;
+  flex-shrink: 0;
+  height: 70%;
+  position: relative;
+}
+
+.profile > .profile-content > .profile-pic > .profile-pic-image {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 100%;
+  height: calc(100% - clamp(10px, 1.5vw, 20px));
+  margin: clamp(5px, 0.75vw, 10px);
+  object-fit: cover;
+  width: calc(100% - clamp(10px, 1.5vw, 20px));
+}
+
+.profile > .profile-content > .profile-name {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: clamp(1em, 2vw, 2em);
+  margin: 0px;
+  text-align: center;
+}
+
+@media (max-width: 1200px), (max-height: 900px) {
+  #nav {
+    width: 80px;
+  }
+
+  #nav-items {
+    gap: 5px;
+    width: 80px;
+  }
+
+  #nav-items > .nav-item {
+    border-radius: 6px;
+    height: 60px;
+    width: 60px;
+  }
+
+  #nav-items > .nav-item > i {
+    font-size: 1.5em;
+  }
+}
